@@ -1,0 +1,16 @@
+{
+  "name": "build-your-own-lodash",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:paulrosenzweig/build-your-own-lodash.git",
+  "author": "Paul Rosenzweig <paul.a.rosenzweig@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "mocha *.test.js"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.3",
+    "prettier": "^2.3.2"
+  }
+}
