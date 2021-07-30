@@ -26,4 +26,15 @@
  * curried(1, 2, 3);
  * // => [1, 2, 3]
  */
-export default function curry(f, arity) {}
+export default function curry(f, arity = f.length) {
+  const addArgs =
+    (args) =>
+    (...moreArgs) => {
+      const allArgs = args.concat(moreArgs);
+      if (allArgs.length >= arity) {
+        return f(...allArgs);
+      }
+      return addArgs(allArgs);
+    };
+  return addArgs([]);
+}

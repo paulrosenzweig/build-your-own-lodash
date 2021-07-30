@@ -28,4 +28,15 @@
  * // Replace `memoize.Cache`.
  * memoize.Cache = WeakMap
  */
-export default function memoize(func, resolver) {}
+export default function memoize(func, resolver = (x) => x) {
+  let cache = new Map();
+  return (...args) => {
+    const key = resolver(...args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = func(...args);
+    cache.set(key, result);
+    return result;
+  };
+}

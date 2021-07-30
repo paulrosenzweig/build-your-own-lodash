@@ -15,4 +15,14 @@
  * // Avoid costly calculations while the window size is in flux.
  * jQuery(window).on('resize', debounce(calculateLayout, 150))
  */
-export default function debounce(func, wait) {}
+export default function debounce(func, wait) {
+  let timerId;
+  let result;
+  return (...args) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      result = func(...args);
+    }, wait);
+    return result;
+  };
+}

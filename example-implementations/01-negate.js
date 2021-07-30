@@ -13,4 +13,6 @@
  * [1, 2, 3, 4, 5, 6].filter(negate(isEven))
  * // => [1, 3, 5]
  */
-export default function negate(predicate) {}
+export default function negate(predicate) {
+  return (...args) => !predicate(...args);
+}

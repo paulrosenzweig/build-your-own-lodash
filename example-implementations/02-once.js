@@ -13,4 +13,14 @@
  * initialize()
  * // => `createApplication` is invoked once
  */
-export default function once(func) {}
+export default function once(func) {
+  let hasExecuted = false;
+  let result;
+
+  return (...args) => {
+    if (hasExecuted) return result;
+    hasExecuted = true;
+    result = func(...args);
+    return result;
+  };
+}

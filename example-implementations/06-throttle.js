@@ -16,4 +16,33 @@
  * // Avoid excessively updating the position while scrolling.
  * jQuery(window).on('scroll', throttle(updatePosition, 100))
  */
-export default function throttle(func, wait) {}
+export default function throttle(func, wait) {
+  let blockCalls = false;
+  let needsTrailing = false;
+  let nextArgs;
+  let result;
+
+  const scheduleInvocation = () =>
+    setTimeout(() => {
+      if (needsTrailing) {
+        needsTrailing = false;
+        result = func(...nextArgs);
+        scheduleInvocation();
+      } else {
+        blockCalls = false;
+      }
+    }, wait);
+
+  return (...args) => {
+    nextArgs = args;
+    if (blockCalls) {
+      needsTrailing = true;
+      return result;
+    }
+
+    blockCalls = true;
+    result = func(...nextArgs);
+    scheduleInvocation();
+    return result;
+  };
+}
