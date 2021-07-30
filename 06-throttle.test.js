@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import throttle from "./throttle.js";
+import throttle from "./06-throttle.js";
 
 describe("throttle", () => {
   it("should throttle a function", (done) => {

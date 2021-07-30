@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import once from "./once.js";
+import once from "./02-once.js";
 
 describe("once", () => {
   it("should invoke `func` once", () => {

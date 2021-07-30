@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import memoize from "./memoize.js";
+import memoize from "./04-memoize.js";
 
 describe("memoize", () => {
   it("should memoize results based on the first argument given", () => {

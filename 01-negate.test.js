@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import negate from "./negate.js";
+import negate from "./01-negate.js";
 
 function isEven(n) {
   return n % 2 === 0;

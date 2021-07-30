@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import debounce from "./debounce.js";
+import debounce from "./05-debounce.js";
 
 describe("debounce", () => {
   it("should debounce a function", (done) => {

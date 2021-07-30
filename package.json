@@ -7,7 +7,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "mocha *.test.js"
+    "test-all": "mocha *.test.js --sort --bail",
+    "test-watch": "mocha --parallel --bail --watch"
   },
   "devDependencies": {
     "mocha": "^9.0.3",

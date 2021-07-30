@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import curry from "./curry.js";
+import curry from "./03-curry.js";
 
 describe("curry", () => {
   function fn(a, b, c, d) {
