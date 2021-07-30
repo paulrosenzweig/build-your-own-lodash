@@ -1,8 +1,8 @@
 import assert from "node:assert";
 import once from "./once.js";
 
-describe("once", function () {
-  it("should invoke `func` once", function () {
+describe("once", () => {
+  it("should invoke `func` once", () => {
     let count = 0;
     const onceFn = once(() => ++count);
 
@@ -11,7 +11,7 @@ describe("once", function () {
     assert.strictEqual(count, 1);
   });
 
-  it("should ignore recursive calls", function () {
+  it("should ignore recursive calls", () => {
     let count = 0;
 
     const onceFn = once(() => {
@@ -23,7 +23,7 @@ describe("once", function () {
     assert.strictEqual(count, 1);
   });
 
-  it("should not throw more than once", function () {
+  it("should not throw more than once", () => {
     const onceFn = once(() => {
       throw new Error();
     });

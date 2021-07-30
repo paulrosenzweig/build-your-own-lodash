@@ -42,7 +42,7 @@
  */
 export default function memoize(func, resolver) {
   let cache = new (memoize.Cache || Map)();
-  const memoized = function (...args) {
+  return (...args) => {
     const key = resolver ? resolver.apply(this, args) : args[0];
     if (cache.has(key)) {
       return cache.get(key);
@@ -51,5 +51,4 @@ export default function memoize(func, resolver) {
     cache = cache.set(key, result);
     return result;
   };
-  return memoized;
 }

@@ -1,9 +1,6 @@
 /**
- * Creates a function that negates the result of the predicate `func`. The
- * `func` predicate is invoked with the `this` binding and arguments of the
- * created function.
+ * Creates a function that negates the result of the predicate `func`.
  *
- * @since 3.0.0
  * @category Function
  * @param {Function} predicate The predicate to negate.
  * @returns {Function} Returns the new negated function.

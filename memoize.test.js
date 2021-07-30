@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import memoize from "./memoize.js";
 
-describe("memoize", function () {
+describe("memoize", () => {
   it("should memoize results based on the first argument given", () => {
     const memoized = memoize((a, b, c) => a + b + c);
 
@@ -72,19 +72,14 @@ describe("memoize", function () {
     const oldCache = memoize.Cache;
     memoize.Cache = ImmutableMap;
 
-    var memoized = memoize(function (object) {
-      return object.id;
-    });
+    const memoized = memoize(
+      (o) => o.val,
+      (o) => o.id
+    );
 
-    var key1 = { id: "a" },
-      key2 = { id: "b" };
-
-    memoized(key1);
-    memoized(key2);
-
-    var cache = memoized.cache;
-    assert.strictEqual(cache.has(key1), true);
-    assert.strictEqual(cache.has(key2), true);
+    assert.strictEqual(memoized({ id: "a", val: 1 }), 1);
+    assert.strictEqual(memoized({ id: "b", val: 2 }), 2);
+    assert.strictEqual(memoized({ id: "a", val: 3 }), 1);
 
     memoize.Cache = oldCache;
   });
