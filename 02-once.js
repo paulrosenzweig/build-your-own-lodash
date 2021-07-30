@@ -3,7 +3,6 @@
  * to the function return the value of the first invocation. The `func` is
  * invoked with the `this` binding and arguments of the created function.
  *
- * @since 0.1.0
  * @category Function
  * @param {Function} func The function to restrict.
  * @returns {Function} Returns the new restricted function.

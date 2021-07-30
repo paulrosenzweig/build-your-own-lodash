@@ -5,13 +5,6 @@
  * provided to the memoized function is used as the map cache key. The `func`
  * is invoked with the `this` binding of the memoized function.
  *
- * **Note:** The cache is exposed as the `cache` property on the memoized
- * function. Its creation may be customized by replacing the `memoize.Cache`
- * constructor with one whose instances implement the
- * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
- * method interface of `clear`, `delete`, `get`, `has`, and `set`.
- *
- * @since 0.1.0
  * @category Function
  * @param {Function} func The function to have its output memoized.
  * @param {Function} [resolver] The function to resolve the cache key.
@@ -21,7 +14,7 @@
  * const object = { 'a': 1, 'b': 2 }
  * const other = { 'c': 3, 'd': 4 }
  *
- * const values = memoize(values)
+ * const values = memoize(Object.values)
  * values(object)
  * // => [1, 2]
  *
@@ -29,26 +22,21 @@
  * // => [3, 4]
  *
  * object.a = 2
- * values(object)
+ * values(object) // returns the cached result
  * // => [1, 2]
- *
- * // Modify the result cache.
- * values.cache.set(object, ['a', 'b'])
- * values(object)
- * // => ['a', 'b']
  *
  * // Replace `memoize.Cache`.
  * memoize.Cache = WeakMap
  */
-export default function memoize(func, resolver) {
-  let cache = new (memoize.Cache || Map)();
+export default function memoize(func, resolver = (x) => x) {
+  let cache = new Map();
   return (...args) => {
-    const key = resolver ? resolver.apply(this, args) : args[0];
+    const key = resolver(...args);
     if (cache.has(key)) {
       return cache.get(key);
     }
-    const result = func.apply(this, args);
-    cache = cache.set(key, result);
+    const result = func(...args);
+    cache.set(key, result);
     return result;
   };
 }

@@ -70,7 +70,7 @@ describe("throttle", () => {
       const results = [throttled("c"), throttled("d")];
       assert.deepStrictEqual(results, ["c", "c"]);
       done();
-    }, 70);
+    }, 90);
   });
 
   it("should return most recent result for a throttled call", (done) => {

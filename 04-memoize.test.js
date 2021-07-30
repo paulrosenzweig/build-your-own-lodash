@@ -52,35 +52,4 @@ describe("memoize", () => {
       assert.strictEqual(count, 1);
     }
   });
-
-  it("should work with an immutable cache", () => {
-    class ImmutableMap {
-      constructor(pairs) {
-        this.m = new Map(pairs);
-      }
-      get(k) {
-        return this.m.get(k);
-      }
-      has(k) {
-        return this.m.has(k);
-      }
-      set(key, value) {
-        return new ImmutableMap([...this.m.entries(), [key, value]]);
-      }
-    }
-
-    const oldCache = memoize.Cache;
-    memoize.Cache = ImmutableMap;
-
-    const memoized = memoize(
-      (o) => o.val,
-      (o) => o.id
-    );
-
-    assert.strictEqual(memoized({ id: "a", val: 1 }), 1);
-    assert.strictEqual(memoized({ id: "b", val: 2 }), 2);
-    assert.strictEqual(memoized({ id: "a", val: 3 }), 1);
-
-    memoize.Cache = oldCache;
-  });
 });
